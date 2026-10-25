@@ -51,6 +51,14 @@
       background-color: #fce7f3 !important;
       box-shadow: 0 2px 8px -2px rgba(219, 39, 119, 0.2);
     }
+    .option-correct {
+      border-color: #10b981 !important;
+      background-color: #ecfdf5 !important;
+    }
+    .option-wrong {
+      border-color: #f43f5e !important;
+      background-color: #fff1f2 !important;
+    }
     @keyframes popAnim {
       0% { transform: scale(0.96); opacity: 0; }
       70% { transform: scale(1.01); opacity: 1; }
@@ -80,10 +88,10 @@
         </div>
       </div>
       <div class="flex gap-2.5 pt-2">
-        <button id="confirm-yes-btn" class="flex-1 py-2.5 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-bold rounded-xl text-xs transition cursor-pointer shadow-sm">
+        <button id="confirm-yes-btn" type="button" class="flex-1 py-2.5 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-bold rounded-xl text-xs transition cursor-pointer shadow-sm">
           Đồng ý nộp bài
         </button>
-        <button onclick="closeConfirmModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition cursor-pointer">
+        <button type="button" onclick="closeConfirmModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition cursor-pointer">
           Quay lại làm tiếp
         </button>
       </div>
@@ -110,7 +118,7 @@
           <span id="top-progress-text" class="text-[11px] font-extrabold text-pink-600">0/20</span>
         </div>
 
-        <button id="sound-btn" onclick="toggleSound()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition cursor-pointer" title="Bật/Tắt âm thanh hiệu ứng">
+        <button id="sound-btn" type="button" onclick="toggleSound()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition cursor-pointer" title="Bật/Tắt âm thanh hiệu ứng">
           <span id="sound-icon">🔊</span>
           <span id="sound-text" class="hidden sm:inline">Âm thanh</span>
         </button>
@@ -120,7 +128,7 @@
           <span id="timer-display">45:00</span>
         </div>
         
-        <button onclick="requestSubmitExam()" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-sm transition active:scale-95 cursor-pointer">
+        <button id="header-submit-btn" type="button" onclick="requestSubmitExam()" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-sm transition active:scale-95 cursor-pointer">
           Nộp bài
         </button>
       </div>
@@ -131,7 +139,7 @@
   <main class="max-w-4xl mx-auto px-4 pt-6 space-y-6">
 
     <!-- THÔNG TIN ĐỀ THI & THÍ SINH -->
-    <div class="bg-white rounded-3xl p-5 sm:p-6 border border-pink-100 shadow-sm space-y-4">
+    <div id="student-info-card" class="bg-white rounded-3xl p-5 sm:p-6 border border-pink-100 shadow-sm space-y-4">
       <div class="text-center pb-3 border-b border-slate-100 space-y-1">
         <p class="text-[11px] font-extrabold tracking-widest text-pink-600 uppercase">TRƯỜNG THPT LÊ QUÝ ĐÔN • TỔ VẬT LÍ – CÔNG NGHỆ</p>
         <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">ĐỀ KIỂM TRA GIỮA HỌC KÌ I - ĐỀ 3</h1>
@@ -150,10 +158,10 @@
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Lớp: <span class="text-pink-600">*</span></label>
-          <input type="text" id="student-class" placeholder="Ví dụ: 10A1" class="w-full text-xs sm:text-sm border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-pink-400/30 focus:border-pink-500 transition bg-slate-50/60 font-medium">
+          <input type="text" id="student-class" placeholder="Ví dụ: 10C10" class="w-full text-xs sm:text-sm border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-pink-400/30 focus:border-pink-500 transition bg-slate-50/60 font-medium">
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Số báo danh: <span class="text-pink-600">*</span></label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Số báo danh:</label>
           <input type="text" id="student-id" placeholder="Ví dụ: 1003" class="w-full text-xs sm:text-sm border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-sky-400/30 focus:border-sky-500 transition bg-slate-50/60 font-medium">
         </div>
         <div>
@@ -211,7 +219,7 @@
         <div>
           <span class="bg-rose-100 text-rose-700 text-[11px] font-extrabold px-2.5 py-1 rounded-lg uppercase">Phần III</span>
           <h2 class="text-base font-extrabold text-slate-800 mt-1.5">Trắc nghiệm trả lời ngắn (Câu 15 – Câu 18)</h2>
-          <p class="text-xs text-slate-500">Điền kết quả số vào 4 ô vuông ký tự bên dưới mỗi câu (tự động nhảy ô khi nhập).</p>
+          <p class="text-xs text-slate-500">Điền kết quả số vào 4 ô vuông ký tự bên dưới mỗi câu (tự động nhảy ô khi nhập, hoặc nhập trực tiếp đáp số).</p>
         </div>
         <span class="text-xs font-extrabold text-rose-600 bg-rose-50 border border-rose-200 px-3 py-1 rounded-full whitespace-nowrap">2,0 điểm</span>
       </div>
@@ -241,10 +249,10 @@
 
     <!-- NÚT NỘP BÀI CUỐI TRANG -->
     <div class="text-center pt-4">
-      <button onclick="requestSubmitExam()" class="w-full sm:w-96 py-4 bg-gradient-to-r from-pink-600 via-rose-600 to-sky-600 hover:opacity-95 text-white font-black text-sm sm:text-base rounded-2xl shadow-lg shadow-pink-500/25 active:scale-98 transition cursor-pointer">
+      <button id="footer-submit-btn" type="button" onclick="requestSubmitExam()" class="w-full sm:w-96 py-4 bg-gradient-to-r from-pink-600 via-rose-600 to-sky-600 hover:opacity-95 text-white font-black text-sm sm:text-base rounded-2xl shadow-lg shadow-pink-500/25 active:scale-98 transition cursor-pointer">
         NỘP BÀI KIỂM TRA 🚀
       </button>
-      <p class="text-[11px] text-slate-400 mt-2 font-medium">Hệ thống sẽ chấm điểm tự động và hiển thị đáp án chi tiết sau khi nộp.</p>
+      <p class="text-[11px] text-slate-400 mt-2 font-medium">Hệ thống sẽ chấm điểm tự động và hiển thị đáp án chi tiết ngay sau khi nộp.</p>
     </div>
 
   </main>
@@ -323,13 +331,13 @@
 
       <!-- CÁC NÚT THAO TÁC CUỐI MODAL -->
       <div class="pt-2 flex flex-col sm:flex-row gap-2.5">
-        <button onclick="copyReport()" class="flex-1 py-3 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl text-xs transition active:scale-98 shadow-sm cursor-pointer">
+        <button type="button" onclick="copyReport()" class="flex-1 py-3 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl text-xs transition active:scale-98 shadow-sm cursor-pointer">
           📋 Sao chép kết quả gửi Giáo viên
         </button>
-        <button onclick="resetExam()" class="px-5 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-xs transition cursor-pointer">
+        <button type="button" onclick="resetExam()" class="px-5 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-xs transition cursor-pointer">
           🔄 Làm lại đề
         </button>
-        <button onclick="closeModalAndReview()" class="px-5 py-3 border border-slate-200 hover:bg-slate-100 text-slate-700 font-bold rounded-xl text-xs transition cursor-pointer">
+        <button type="button" onclick="closeModalAndReview()" class="px-5 py-3 border border-slate-200 hover:bg-slate-100 text-slate-700 font-bold rounded-xl text-xs transition cursor-pointer">
           Đóng & Xem lại bài
         </button>
       </div>
@@ -340,18 +348,19 @@
   <!-- JAVASCRIPT XỬ LÝ TOÀN BỘ LOGIC ĐỀ 3 -->
   <script>
     /* ==============================================================
-       1. HỆ THỐNG THÔNG BÁO TOAST & MODAL (KHÔNG DÙNG ALERT/CONFIRM)
+       1. HỆ THỐNG THÔNG BÁO TOAST & MODAL (AN TOÀN TUYỆT ĐỐI)
        ============================================================== */
     let toastTimeout = null;
     function showToast(message, icon = "🔔") {
       const toast = document.getElementById("custom-toast");
+      if (!toast) return;
       document.getElementById("toast-icon").innerText = icon;
       document.getElementById("toast-message").innerText = message;
       toast.classList.remove("hidden");
       if (toastTimeout) clearTimeout(toastTimeout);
       toastTimeout = setTimeout(() => {
         toast.classList.add("hidden");
-      }, 3500);
+      }, 3800);
     }
 
     function openConfirmModal(title, desc, btnText, onConfirmCallback) {
@@ -371,17 +380,19 @@
     }
 
     /* ==============================================================
-       2. ÂM THANH TƯƠNG TÁC WEB AUDIO API
+       2. ÂM THANH TƯƠNG TÁC WEB AUDIO API (BỌC TRY-CATCH CHO IOS)
        ============================================================== */
     let audioContext = null;
     let isSoundMuted = false;
 
     function getAudioContext() {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return null;
       if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        audioContext = new AudioCtx();
       }
       if (audioContext.state === 'suspended') {
-        audioContext.resume();
+        audioContext.resume().catch(() => {});
       }
       return audioContext;
     }
@@ -405,6 +416,7 @@
       if (isSoundMuted) return;
       try {
         const ctx = getAudioContext();
+        if (!ctx) return;
         const now = ctx.currentTime;
 
         if (type === 'click') {
@@ -427,7 +439,7 @@
             gain.connect(ctx.destination);
             osc.type = 'triangle';
             osc.frequency.setValueAtTime(freq, now + idx * 0.08);
-            gain.gain.setValueAtTime(0, now + idx * 0.08);
+            gain.gain.setValueAtTime(0.001, now + idx * 0.08);
             gain.gain.linearRampToValueAtTime(0.18, now + idx * 0.08 + 0.02);
             gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.35);
             osc.start(now + idx * 0.08);
@@ -440,7 +452,7 @@
     }
 
     /* ==============================================================
-       3. DỮ LIỆU ĐỀ KIỂM TRA ĐỀ 3 (ĐÃ LƯỢC BỎ MỌI KÝ HIỆU CHỈ BÁO)
+       3. DỮ LIỆU ĐỀ KIỂM TRA ĐỀ 3 (ĐÃ SỬA CÂU 11 BỊ TRÙNG CÂU 1)
        ============================================================== */
     const EXAM_DATA = {
       // PHẦN I: 12 CÂU TRẮC NGHIỆM (0,25đ/câu = 3,0 điểm)
@@ -568,15 +580,15 @@
         },
         {
           id: 11,
-          q: "Cách sắp xếp nào sau đây trong 5 bước của phương pháp thực nghiệm là đúng?",
+          q: "Trong chuyển động thẳng biến đổi đều, công thức liên hệ giữa vận tốc, gia tốc và độ dịch chuyển là:",
           options: [
-            "Xác định vấn đề cần nghiên cứu, dự đoán, quan sát, thí nghiệm, kết luận.",
-            "Quan sát, xác định vấn đề cần nghiên cứu, thí nghiệm, dự đoán, kết luận.",
-            "Xác định vấn đề cần nghiên cứu, quan sát, dự đoán, thí nghiệm, kết luận.",
-            "Thí nghiệm, xác định vấn đề cần nghiên cứu, dự đoán, quan sát, kết luận."
+            "$v - v_0 = 2ad$.",
+            "$v^2 - v_0^2 = 2ad$.",
+            "$v^2 + v_0^2 = 2ad$.",
+            "$v_0^2 - v^2 = 2ad$."
           ],
-          correct: 2,
-          explain: "Thứ tự chuẩn của phương pháp thực nghiệm: Xác định vấn đề cần nghiên cứu $\\rightarrow$ Quan sát $\\rightarrow$ Dự đoán $\\rightarrow$ Thí nghiệm $\\rightarrow$ Kết luận."
+          correct: 1,
+          explain: "Công thức độc lập với thời gian liên hệ giữa vận tốc $v$, vận tốc đầu $v_0$, gia tốc $a$ và độ dịch chuyển $d$ trong chuyển động thẳng biến đổi đều là $v^2 - v_0^2 = 2ad$."
         },
         {
           id: 12,
@@ -592,7 +604,7 @@
         }
       ],
 
-      // PHẦN II: TRẮC NGHIỆM ĐÚNG SAI (2,0 điểm - mỗi ý đúng 0,25 điểm)
+      // PHẦN II: TRẮC NGHIỆM ĐÚNG SAI (2,0 điểm)
       part2: [
         {
           id: 13,
@@ -682,7 +694,7 @@
         }
       ],
 
-      // PHẦN IV: TỰ LUẬN (3,0 điểm - 2 câu có nút mở Camera chụp ảnh/tải ảnh bài làm)
+      // PHẦN IV: TỰ LUẬN (3,0 điểm)
       part4: [
         {
           id: 19,
@@ -725,18 +737,15 @@
       let count = 0;
       count += Object.keys(userAnswers.part1).length;
       
-      // Câu 13 & 14: tính là đã làm nếu chọn ít nhất 1 ý
       const p2_13 = [0,1,2,3].some(idx => userAnswers.part2[`13_${idx}`] !== undefined);
       const p2_14 = [0,1,2,3].some(idx => userAnswers.part2[`14_${idx}`] !== undefined);
       if (p2_13) count++;
       if (p2_14) count++;
 
-      // Phần 3 (4 câu)
       [15, 16, 17, 18].forEach(id => {
         if (userAnswers.part3[id] && userAnswers.part3[id].length > 0) count++;
       });
 
-      // Phần 4 (2 câu)
       [19, 20].forEach(id => {
         if (userAnswers.part4.images[id] || (userAnswers.part4.notes[id] && userAnswers.part4.notes[id].length > 0)) {
           count++;
@@ -755,37 +764,24 @@
        ============================================================== */
     function getSvgGraphic(type) {
       if (type === "graph_c3_radiation") {
-        // CÂU 3: Biển cảnh báo chất phóng xạ chuẩn quốc tế ISO 7010 W003
         return `
           <div class="flex justify-center my-3">
             <svg width="165" height="148" viewBox="0 0 165 148" class="bg-white rounded-2xl border border-slate-200 shadow-xs p-2">
-              <!-- Tam giác viền đen bo góc ngoài -->
               <polygon points="82.5,8 157,138 8,138" fill="#0f172a" stroke="#0f172a" stroke-width="5" stroke-linejoin="round" />
-              <!-- Tam giác nền vàng rực rỡ bên trong -->
               <polygon points="82.5,20 145,130 20,130" fill="#facc15" stroke="#facc15" stroke-width="2" stroke-linejoin="round" />
-              
-              <!-- Biểu tượng 3 cánh quạt phóng xạ (Trefoil) tâm tại (82.5, 92) -->
               <g transform="translate(82.5, 92)">
-                <!-- Cánh quạt 1 (Góc phải trên: -60 deg đến 0 deg) -->
                 <path d="M 5.5 -9.5 L 16 -27.7 A 32 32 0 0 1 32 0 L 11 0 A 11 11 0 0 0 5.5 -9.5 Z" fill="#0f172a" />
-                <!-- Cánh quạt 2 (Góc trái trên: -180 deg đến -120 deg) -->
                 <path d="M -11 0 L -32 0 A 32 32 0 0 1 -16 -27.7 L -5.5 -9.5 A 11 11 0 0 0 -11 0 Z" fill="#0f172a" />
-                <!-- Cánh quạt 3 (Góc dưới: 60 deg đến 120 deg) -->
                 <path d="M 5.5 9.5 L 16 27.7 A 32 32 0 0 1 -16 27.7 L -5.5 9.5 A 11 11 0 0 0 5.5 9.5 Z" fill="#0f172a" />
-                <!-- Chấm tròn tâm -->
                 <circle cx="0" cy="0" r="6.5" fill="#0f172a" />
               </g>
             </svg>
           </div>
         `;
       } else if (type === "graph_c13_dt") {
-        // CÂU 13: Đồ thị d(m) - t(s) chuẩn xác từng tọa độ: (0,1), (1,3), (2,5), (3,7), (4,7), (5,7)
-        // Trục hoành t: 0..5 s (mỗi 1s = 42px), x0 = 50 -> x5 = 260
-        // Trục tung d: 0..7 m (mỗi 1m = 22px), y0 = 195 -> y7 = 41
         return `
           <div class="flex justify-center my-3 overflow-x-auto">
             <svg width="330" height="235" viewBox="0 0 330 235" class="bg-white rounded-2xl border border-sky-200 shadow-xs p-1">
-              <!-- Lưới tọa độ nét đứt mờ -->
               ${[1, 2, 3, 4, 5].map(t => {
                 const x = 50 + t * 42;
                 return `<line x1="${x}" y1="30" x2="${x}" y2="195" stroke="#e2e8f0" stroke-width="1" />`;
@@ -794,31 +790,20 @@
                 const y = 195 - d * 22;
                 return `<line x1="50" y1="${y}" x2="275" y2="${y}" stroke="#e2e8f0" stroke-width="1" />`;
               }).join('')}
-
-              <!-- Đường gióng nét đứt đậm cho các điểm (1;3), (2;5), (3;7), (4;7), (5;7) -->
               <line x1="92" y1="195" x2="92" y2="129" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3" />
               <line x1="50" y1="129" x2="92" y2="129" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3" />
-
               <line x1="134" y1="195" x2="134" y2="85" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3" />
               <line x1="50" y1="85" x2="134" y2="85" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3" />
-
               <line x1="176" y1="195" x2="176" y2="41" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3" />
               <line x1="50" y1="41" x2="176" y2="41" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3" />
-
               <line x1="218" y1="195" x2="218" y2="41" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3" />
               <line x1="260" y1="195" x2="260" y2="41" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3" />
-
-              <!-- Trục hoành t (s) -->
               <line x1="50" y1="195" x2="295" y2="195" stroke="#0f172a" stroke-width="2.2" />
               <polygon points="292,190 302,195 292,200" fill="#0f172a" />
               <text x="282" y="218" font-size="12" font-weight="800" fill="#0f172a">t (s)</text>
-
-              <!-- Trục tung d (m) -->
               <line x1="50" y1="195" x2="50" y2="16" stroke="#0f172a" stroke-width="2.2" />
               <polygon points="45,20 50,10 55,20" fill="#0f172a" />
               <text x="10" y="22" font-size="12" font-weight="800" fill="#0f172a">d (m)</text>
-
-              <!-- Nhãn trục hoành -->
               <text x="34" y="210" font-size="12" font-weight="700" fill="#334155">0</text>
               ${[1, 2, 3, 4, 5].map(t => {
                 const x = 50 + t * 42;
@@ -827,8 +812,6 @@
                   <text x="${x - 4}" y="214" font-size="12" font-weight="700" fill="#0f172a">${t}</text>
                 `;
               }).join('')}
-
-              <!-- Nhãn trục tung -->
               ${[1, 3, 5, 7].map(d => {
                 const y = 195 - d * 22;
                 return `
@@ -836,11 +819,7 @@
                   <text x="28" y="${y + 4}" font-size="12" font-weight="700" fill="#0f172a">${d}</text>
                 `;
               }).join('')}
-
-              <!-- Đường biểu diễn d(t): (0,1) -> (1,3) -> (2,5) -> (3,7) -> (4,7) -> (5,7) -->
               <polyline points="50,173 92,129 134,85 176,41 218,41 260,41" fill="none" stroke="#0284c7" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
-
-              <!-- Điểm tọa độ -->
               <circle cx="50" cy="173" r="4" fill="#db2777" stroke="#ffffff" stroke-width="1.5" />
               <circle cx="92" cy="129" r="4" fill="#db2777" stroke="#ffffff" stroke-width="1.5" />
               <circle cx="134" cy="85" r="4" fill="#db2777" stroke="#ffffff" stroke-width="1.5" />
@@ -851,45 +830,31 @@
           </div>
         `;
       } else if (type === "graph_c18_road") {
-        // CÂU 18: Trục tọa độ N (0m) - 200m - X (400m) - 600m - S (800m) - 1000m - T (1200m)
         return `
           <div class="flex justify-center my-3 overflow-x-auto">
             <svg width="560" height="148" viewBox="0 0 560 148" class="bg-amber-50/50 rounded-2xl border border-amber-200 p-1">
-              <!-- Mặt đường xám -->
               <rect x="10" y="82" width="540" height="52" rx="6" fill="#cbd5e1" />
               <line x1="25" y1="112" x2="535" y2="112" stroke="#0f172a" stroke-width="2" />
-
-              <!-- Ngôi nhà N (0 m) -->
               <polygon points="20,45 42,22 64,45" fill="#f97316" stroke="#9a3412" stroke-width="1.5" />
               <rect x="26" y="45" width="32" height="32" fill="#fed7aa" stroke="#9a3412" stroke-width="1.5" />
               <rect x="32" y="54" width="10" height="23" fill="#38bdf8" />
-
-              <!-- Học sinh đi xe đạp -->
               <circle cx="72" cy="84" r="6" fill="none" stroke="#0f172a" stroke-width="2" />
               <circle cx="90" cy="84" r="6" fill="none" stroke="#0f172a" stroke-width="2" />
               <line x1="72" y1="84" x2="81" y2="73" stroke="#0284c7" stroke-width="2" />
               <circle cx="80" cy="64" r="4" fill="#38bdf8" />
-
-              <!-- Trạm Xăng X (400 m) -->
               <rect x="150" y="28" width="80" height="12" rx="2" fill="#facc15" stroke="#dc2626" stroke-width="1.5" />
               <text x="165" y="37" font-size="9" font-weight="900" fill="#0f172a">Trạm Xăng</text>
               <rect x="160" y="40" width="6" height="35" fill="#334155" />
               <rect x="214" y="40" width="6" height="35" fill="#334155" />
               <rect x="172" y="52" width="12" height="22" fill="#ef4444" />
               <rect x="196" y="52" width="12" height="22" fill="#ef4444" />
-
-              <!-- Siêu thị S (800 m) -->
               <rect x="295" y="34" width="90" height="42" fill="#38bdf8" stroke="#0369a1" stroke-width="1.5" />
               <rect x="302" y="40" width="52" height="10" fill="#e11d48" />
               <text x="312" y="48" font-size="8" font-weight="bold" fill="#ffffff">Siêu thị</text>
               <rect x="305" y="54" width="45" height="22" fill="#bae6fd" />
-
-              <!-- Trường học T (1200 m) -->
               <rect x="435" y="32" width="95" height="44" fill="#f59e0b" stroke="#b45309" stroke-width="1.5" />
               <rect x="468" y="20" width="30" height="56" fill="#fbbf24" stroke="#b45309" stroke-width="1.5" />
               <circle cx="483" cy="30" r="5" fill="#ffffff" stroke="#0f172a" />
-
-              <!-- Các mốc tọa độ 0, 200, 400, 600, 800, 1000, 1200 m -->
               ${[
                 { x: 42, label: "0", code: "N" },
                 { x: 115, label: "200 m", code: "" },
@@ -908,11 +873,9 @@
           </div>
         `;
       } else if (type === "graph_c19_dt") {
-        // CÂU 19: Đồ thị d(km) - t(h) với mốc 0,5; 1; 1,5; 2h và 45; 90km chuẩn tỉ lệ, đường gióng rõ nét
         return `
           <div class="flex justify-center my-3">
             <svg width="265" height="240" viewBox="0 0 265 240" class="bg-white rounded-2xl border border-slate-200 shadow-xs p-1">
-              <!-- Lưới 4x4 ô vuông (mỗi ô 40px) -->
               ${[1, 2, 3, 4].map(i => {
                 const x = 50 + i * 40;
                 const y = 190 - i * 40;
@@ -923,28 +886,19 @@
                   <line x1="45" y1="${y}" x2="55" y2="${y}" stroke="#0f172a" stroke-width="2.4" />
                 `;
               }).join('')}
-
-              <!-- Trục hoành t (h) -->
               <line x1="50" y1="190" x2="238" y2="190" stroke="#0f172a" stroke-width="2.5" />
               <polygon points="234,185 245,190 234,195" fill="#0f172a" />
               <text x="218" y="214" font-size="13" font-weight="800" fill="#0f172a">t (h)</text>
-
-              <!-- Trục tung d (km) -->
               <line x1="50" y1="190" x2="50" y2="12" stroke="#0f172a" stroke-width="2.5" />
               <polygon points="45,16 50,6 55,16" fill="#0f172a" />
               <text x="12" y="18" font-size="13" font-weight="800" fill="#0f172a">d (km)</text>
-
-              <!-- Nhãn số -->
               <text x="32" y="206" font-size="13" font-weight="700" fill="#334155">O</text>
               <text x="80" y="212" font-size="12" font-weight="700" fill="#0f172a">0,5</text>
               <text x="126" y="212" font-size="12" font-weight="700" fill="#0f172a">1</text>
               <text x="160" y="212" font-size="12" font-weight="700" fill="#0f172a">1,5</text>
               <text x="206" y="212" font-size="12" font-weight="700" fill="#0f172a">2</text>
-
               <text x="22" y="115" font-size="13" font-weight="700" fill="#0f172a">45</text>
               <text x="22" y="35" font-size="13" font-weight="700" fill="#0f172a">90</text>
-
-              <!-- Đường thẳng đồ thị từ (0,0) đến (2h, 90km) -->
               <line x1="50" y1="190" x2="210" y2="30" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" />
               <circle cx="130" cy="110" r="4" fill="#db2777" />
               <circle cx="210" cy="30" r="4" fill="#db2777" />
@@ -1045,6 +999,7 @@
           </div>
           ${item.hasGraph ? getSvgGraphic(item.hasGraph) : ""}
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">${optionsHtml}</div>
+          <div id="explain_p1_${item.id}" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-slate-700 leading-relaxed"></div>
         `;
         p1Box.appendChild(qCard);
       });
@@ -1137,7 +1092,7 @@
             <div class="flex flex-wrap items-center gap-2.5">
               <label class="px-4 py-2.5 bg-gradient-to-r from-cyan-600 to-sky-600 hover:from-cyan-700 hover:to-sky-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-xs active:scale-95">
                 <span>📷 Mở Camera Chụp Ảnh / Chọn Ảnh Câu ${item.id}</span>
-                <input type="file" accept="image/*" capture="environment" onchange="handleImageUpload(event, ${item.id})" class="hidden">
+                <input type="file" accept="image/*" onchange="handleImageUpload(event, ${item.id})" class="hidden">
               </label>
 
               <button type="button" id="btn_clear_img_${item.id}" onclick="clearImage(${item.id})" class="hidden px-3.5 py-2.5 border border-rose-200 text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-xl text-xs font-bold transition cursor-pointer">
@@ -1151,10 +1106,10 @@
               <img id="preview_img_${item.id}" src="" alt="Ảnh bài làm" class="max-h-80 mx-auto rounded-xl shadow-sm border border-slate-100 object-contain">
             </div>
 
-            <!-- Ô nhập ghi chú lời giải bổ trợ -->
+            <!-- Ô nhập ghi chú lời giải bổ trợ (Dùng oninput thay vì onchange để lưu tức thì) -->
             <div class="pt-1">
               <label class="block text-[11px] font-bold text-slate-500 mb-1">Ô ghi chú lời giải bổ trợ / Tóm tắt đáp số:</label>
-              <textarea id="note_essay_${item.id}" rows="2" placeholder="Em có thể gõ tóm tắt lời giải hoặc đáp số vào đây để giáo viên đối chiếu..." onchange="saveEssayNote(${item.id}, this.value)" class="w-full text-xs p-3 border border-slate-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-cyan-400/30 focus:border-cyan-500 transition resize-none"></textarea>
+              <textarea id="note_essay_${item.id}" rows="2" placeholder="Em có thể gõ tóm tắt lời giải hoặc đáp số vào đây để giáo viên đối chiếu..." oninput="saveEssayNote(${item.id}, this.value)" class="w-full text-xs p-3 border border-slate-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-cyan-400/30 focus:border-cyan-500 transition resize-none"></textarea>
             </div>
           </div>
         `;
@@ -1165,21 +1120,25 @@
     }
 
     function triggerMathRender() {
-      if (window.renderMathInElement) {
-        renderMathInElement(document.body, {
-          delimiters: [
-            { left: '$$', right: '$$', display: true },
-            { left: '$', right: '$', display: false }
-          ],
-          throwOnError: false
-        });
-      } else {
-        setTimeout(triggerMathRender, 150);
+      try {
+        if (window.renderMathInElement) {
+          renderMathInElement(document.body, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '$', right: '$', display: false }
+            ],
+            throwOnError: false
+          });
+        } else {
+          setTimeout(triggerMathRender, 200);
+        }
+      } catch (e) {
+        console.warn("KaTeX render warning:", e);
       }
     }
 
     /* ==============================================================
-       7. XỬ LÝ TƯƠNG TÁC LÀM BÀI (KHÔNG TIẾT LỘ ĐÁP ÁN TRƯỚC KHI NỘP)
+       7. XỬ LÝ TƯƠNG TÁC LÀM BÀI
        ============================================================== */
     function selectOptionP1(qId, optIndex) {
       if (isSubmitted) return;
@@ -1207,7 +1166,6 @@
       const btnT = document.getElementById(`btn_tf_${qId}_${subIndex}_t`);
       const btnF = document.getElementById(`btn_tf_${qId}_${subIndex}_f`);
 
-      // Đổi màu nút theo lựa chọn (Hồng hoặc Xanh dương), không lộ đúng/sai
       if (val === true) {
         btnT.className = "px-4 py-1.5 rounded-xl bg-pink-600 text-white font-bold text-xs shadow-xs transition cursor-pointer";
         btnF.className = "px-4 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-400 bg-white transition cursor-pointer";
@@ -1266,7 +1224,8 @@
     }
 
     function handleImageUpload(e, itemId) {
-      const file = e.target.files[0];
+      if (isSubmitted) return;
+      const file = e.target.files && e.target.files[0];
       if (!file) return;
 
       const reader = new FileReader();
@@ -1279,11 +1238,13 @@
         const clearBtn = document.getElementById(`btn_clear_img_${itemId}`);
         const statusSpan = document.getElementById(`status_img_${itemId}`);
 
-        previewImg.src = base64Str;
-        previewContainer.classList.remove('hidden');
-        clearBtn.classList.remove('hidden');
-        statusSpan.innerText = "✓ Đã đính kèm 1 ảnh";
-        statusSpan.className = "text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200";
+        if (previewImg) previewImg.src = base64Str;
+        if (previewContainer) previewContainer.classList.remove('hidden');
+        if (clearBtn) clearBtn.classList.remove('hidden');
+        if (statusSpan) {
+          statusSpan.innerText = "✓ Đã đính kèm 1 ảnh";
+          statusSpan.className = "text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200";
+        }
 
         playAudioTone('tadaa');
         showToast(`Đã tải lên ảnh bài làm Câu ${itemId} thành công!`, "📸");
@@ -1293,19 +1254,24 @@
     }
 
     function clearImage(itemId) {
+      if (isSubmitted) return;
       delete userAnswers.part4.images[itemId];
-      document.getElementById(`preview_container_${itemId}`).classList.add('hidden');
-      document.getElementById(`preview_img_${itemId}`).src = '';
-      document.getElementById(`btn_clear_img_${itemId}`).classList.add('hidden');
+      document.getElementById(`preview_container_${itemId}`)?.classList.add('hidden');
+      const imgEl = document.getElementById(`preview_img_${itemId}`);
+      if (imgEl) imgEl.src = '';
+      document.getElementById(`btn_clear_img_${itemId}`)?.classList.add('hidden');
       const statusSpan = document.getElementById(`status_img_${itemId}`);
-      statusSpan.innerText = "Chưa có ảnh đính kèm";
-      statusSpan.className = "text-[11px] font-semibold text-slate-400";
+      if (statusSpan) {
+        statusSpan.innerText = "Chưa có ảnh đính kèm";
+        statusSpan.className = "text-[11px] font-semibold text-slate-400";
+      }
       playAudioTone('click');
       updateProgressUI();
     }
 
     function saveEssayNote(itemId, val) {
-      userAnswers.part4.notes[itemId] = val.trim();
+      if (isSubmitted) return;
+      userAnswers.part4.notes[itemId] = (val || "").trim();
       updateProgressUI();
     }
 
@@ -1325,7 +1291,7 @@
         timeLeft--;
         const m = Math.floor(timeLeft / 60);
         const s = timeLeft % 60;
-        display.innerText = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+        if (display) display.innerText = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
       }, 1000);
     }
 
@@ -1333,163 +1299,214 @@
        9. CHẤM ĐIỂM & XUẤT BÁO CÁO KẾT QUẢ CHI TIẾT SAU KHI NỘP
        ============================================================== */
     function requestSubmitExam() {
-      const name = document.getElementById("student-name").value.trim();
-      const cls = document.getElementById("student-class").value.trim();
-      const sbd = document.getElementById("student-id").value.trim();
-
-      if (!name || !cls || !sbd) {
-        showToast("Em vui lòng điền đầy đủ Họ tên, Lớp và Số báo danh ở đầu trang!", "⚠️");
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      // Nếu bài đã nộp rồi, bấm nút sẽ mở lại bảng kết quả ngay
+      if (isSubmitted) {
+        document.getElementById("result-modal").classList.remove("hidden");
         return;
       }
 
+      const name = document.getElementById("student-name")?.value.trim() || "Học sinh (Chưa ghi tên)";
+      const cls = document.getElementById("student-class")?.value.trim() || "10...";
+
       openConfirmModal(
         "Xác nhận nộp bài kiểm tra Đề 3?",
-        `Học sinh: ${name} - Lớp ${cls}. Sau khi bấm Đồng ý, hệ thống sẽ khóa bài làm và công bố điểm kiểm tra cuối cùng.`,
+        `Học sinh: ${name} - Lớp ${cls}. Sau khi bấm Đồng ý, hệ thống sẽ khóa bài làm và hiển thị điểm số ngay lập tức.`,
         "Đồng ý nộp bài 🚀",
         submitExam
       );
     }
 
     function submitExam() {
-      isSubmitted = true;
-      if (timerInterval) clearInterval(timerInterval);
-      playAudioTone('tadaa');
+      try {
+        isSubmitted = true;
+        if (timerInterval) clearInterval(timerInterval);
+        playAudioTone('tadaa');
 
-      let solutionsHtml = `<div class="font-extrabold text-slate-900 text-sm border-b border-slate-200 pb-2 mb-3">ĐÁP ÁN & HƯỚNG DẪN GIẢI CHI TIẾT ĐỀ 3:</div>`;
+        // Cập nhật lại câu trả lời ngắn và ghi chú tự luận trực tiếp từ DOM để đảm bảo không sót dữ liệu
+        [15, 16, 17, 18].forEach(qId => {
+          const container = document.getElementById(`box_group_${qId}`);
+          if (container) {
+            const inputs = container.querySelectorAll("input");
+            let str = "";
+            inputs.forEach(inp => {
+              str += inp.value;
+              inp.disabled = true;
+            });
+            userAnswers.part3[qId] = str.trim();
+          }
+        });
 
-      // 1. Chấm Phần I (12 câu x 0,25đ = 3,0đ)
-      let scoreP1 = 0;
-      solutionsHtml += `<div class="font-extrabold text-pink-700 text-xs mb-1.5">PHẦN I: Trắc nghiệm nhiều lựa chọn (3,0 điểm)</div><ul class="space-y-2 mb-4">`;
-      EXAM_DATA.part1.forEach(item => {
-        const letters = ["A", "B", "C", "D"];
-        const userChoice = userAnswers.part1[item.id];
-        const isRight = userChoice === item.correct;
-        if (isRight) scoreP1 += 0.25;
+        [19, 20].forEach(qId => {
+          const noteEl = document.getElementById(`note_essay_${qId}`);
+          if (noteEl) {
+            userAnswers.part4.notes[qId] = noteEl.value.trim();
+            noteEl.disabled = true;
+          }
+        });
 
-        solutionsHtml += `
-          <li class="p-2.5 rounded-xl ${isRight ? 'bg-emerald-50 border border-emerald-200' : 'bg-rose-50 border border-rose-200'}">
-            <div class="flex justify-between items-center">
-              <span><strong>Câu ${item.id}:</strong> Đáp án đúng: <strong class="text-pink-700">${letters[item.correct]}</strong></span>
-              <span class="font-bold ${isRight ? 'text-emerald-700' : 'text-rose-700'}">Em chọn: ${userChoice !== undefined ? letters[userChoice] : 'Chưa chọn'} ${isRight ? '✓' : '✗'}</span>
-            </div>
-            <div class="text-slate-600 mt-1 text-[11px] leading-relaxed">${item.explain}</div>
-          </li>
-        `;
-      });
-      solutionsHtml += `</ul>`;
+        let solutionsHtml = `<div class="font-extrabold text-slate-900 text-sm border-b border-slate-200 pb-2 mb-3">ĐÁP ÁN & HƯỚNG DẪN GIẢI CHI TIẾT ĐỀ 3:</div>`;
 
-      // 2. Chấm Phần II (2 câu, tính điểm chuẩn theo quy tắc Bộ GD: 1 ý=0,1đ; 2 ý=0,25đ; 3 ý=0,5đ; 4 ý=1,0đ)
-      let scoreP2 = 0;
-      solutionsHtml += `<div class="font-extrabold text-sky-700 text-xs mb-1.5">PHẦN II: Trắc nghiệm Đúng/Sai (2,0 điểm)</div><ul class="space-y-2.5 mb-4">`;
-      EXAM_DATA.part2.forEach(qItem => {
-        let rightCount = 0;
-        let subDetails = "";
-        qItem.items.forEach((sub, sIndex) => {
-          const key = `${qItem.id}_${sIndex}`;
-          const userVal = userAnswers.part2[key];
-          const isRight = userVal === sub.correct;
-          if (isRight) rightCount++;
+        // 1. Chấm Phần I (12 câu x 0,25đ = 3,0đ)
+        let scoreP1 = 0;
+        solutionsHtml += `<div class="font-extrabold text-pink-700 text-xs mb-1.5">PHẦN I: Trắc nghiệm nhiều lựa chọn (3,0 điểm)</div><ul class="space-y-2 mb-4">`;
+        EXAM_DATA.part1.forEach(item => {
+          const letters = ["A", "B", "C", "D"];
+          const userChoice = userAnswers.part1[item.id];
+          const isRight = userChoice === item.correct;
+          if (isRight) scoreP1 += 0.25;
 
-          subDetails += `
-            <div class="p-2 rounded-lg bg-white/80 border border-slate-100 mt-1.5 text-[11px]">
-              <div class="${isRight ? 'text-emerald-700 font-semibold' : 'text-rose-700 font-semibold'}">
-                • ${sub.text} <br>
-                ➔ Đáp án: <strong>${sub.correct ? 'ĐÚNG' : 'SAI'}</strong> | Em chọn: <strong>${userVal === undefined ? 'Chưa chọn' : (userVal ? 'ĐÚNG' : 'SAI')}</strong> ${isRight ? '✓' : '✗'}
+          // Tô màu đúng/sai trực tiếp trên đề khi học sinh đóng Modal xem lại
+          for (let i = 0; i < 4; i++) {
+            const lbl = document.getElementById(`label_p1_${item.id}_${i}`);
+            if (lbl) {
+              lbl.classList.remove("option-selected");
+              if (i === item.correct) lbl.classList.add("option-correct");
+              else if (i === userChoice && !isRight) lbl.classList.add("option-wrong");
+            }
+          }
+          const expBox = document.getElementById(`explain_p1_${item.id}`);
+          if (expBox) {
+            expBox.innerHTML = `<strong>Đáp án đúng: ${letters[item.correct]}</strong> — ${item.explain}`;
+            expBox.classList.remove("hidden");
+          }
+
+          solutionsHtml += `
+            <li class="p-2.5 rounded-xl ${isRight ? 'bg-emerald-50 border border-emerald-200' : 'bg-rose-50 border border-rose-200'}">
+              <div class="flex justify-between items-center">
+                <span><strong>Câu ${item.id}:</strong> Đáp án đúng: <strong class="text-pink-700">${letters[item.correct]}</strong></span>
+                <span class="font-bold ${isRight ? 'text-emerald-700' : 'text-rose-700'}">Em chọn: ${userChoice !== undefined ? letters[userChoice] : 'Chưa chọn'} ${isRight ? '✓' : '✗'}</span>
               </div>
-              <div class="text-slate-500 italic mt-0.5">↳ ${sub.explain}</div>
-            </div>
+              <div class="text-slate-600 mt-1 text-[11px] leading-relaxed">${item.explain}</div>
+            </li>
           `;
         });
+        solutionsHtml += `</ul>`;
 
-        let subScore = 0;
-        if (rightCount === 1) subScore = 0.1;
-        else if (rightCount === 2) subScore = 0.25;
-        else if (rightCount === 3) subScore = 0.5;
-        else if (rightCount === 4) subScore = 1.0;
-        scoreP2 += subScore;
+        // 2. Chấm Phần II (2 câu, tính điểm chuẩn theo quy tắc Bộ GD: 1 ý=0,1đ; 2 ý=0,25đ; 3 ý=0,5đ; 4 ý=1,0đ)
+        let scoreP2 = 0;
+        solutionsHtml += `<div class="font-extrabold text-sky-700 text-xs mb-1.5">PHẦN II: Trắc nghiệm Đúng/Sai (2,0 điểm)</div><ul class="space-y-2.5 mb-4">`;
+        EXAM_DATA.part2.forEach(qItem => {
+          let rightCount = 0;
+          let subDetails = "";
+          qItem.items.forEach((sub, sIndex) => {
+            const key = `${qItem.id}_${sIndex}`;
+            const userVal = userAnswers.part2[key];
+            const isRight = userVal === sub.correct;
+            if (isRight) rightCount++;
 
-        solutionsHtml += `
-          <li class="p-3 rounded-xl bg-sky-50 border border-sky-200">
-            <div class="font-bold text-sky-950">${qItem.title} (Đạt: ${subScore.toFixed(2)} / 1,00 đ)</div>
-            ${subDetails}
-          </li>
-        `;
-      });
-      solutionsHtml += `</ul>`;
+            subDetails += `
+              <div class="p-2 rounded-lg bg-white/80 border border-slate-100 mt-1.5 text-[11px]">
+                <div class="${isRight ? 'text-emerald-700 font-semibold' : 'text-rose-700 font-semibold'}">
+                  • ${sub.text} <br>
+                  ➔ Đáp án: <strong>${sub.correct ? 'ĐÚNG' : 'SAI'}</strong> | Em chọn: <strong>${userVal === undefined ? 'Chưa chọn' : (userVal ? 'ĐÚNG' : 'SAI')}</strong> ${isRight ? '✓' : '✗'}
+                </div>
+                <div class="text-slate-500 italic mt-0.5">↳ ${sub.explain}</div>
+              </div>
+            `;
+          });
 
-      // 3. Chấm Phần III (4 câu x 0,5đ = 2,0đ)
-      let scoreP3 = 0;
-      solutionsHtml += `<div class="font-extrabold text-rose-700 text-xs mb-1.5">PHẦN III: Trắc nghiệm trả lời ngắn (2,0 điểm)</div><ul class="space-y-2 mb-4">`;
-      EXAM_DATA.part3.forEach(item => {
-        const rawAns = (userAnswers.part3[item.id] || "").trim().toLowerCase();
-        const normAns = rawAns.replace(',', '.');
-        const isMatched = item.acceptedAnswers.some(ok => {
-          const normOk = ok.toLowerCase().replace(',', '.');
-          return normOk === normAns || ok.toLowerCase() === rawAns;
+          let subScore = 0;
+          if (rightCount === 1) subScore = 0.1;
+          else if (rightCount === 2) subScore = 0.25;
+          else if (rightCount === 3) subScore = 0.5;
+          else if (rightCount === 4) subScore = 1.0;
+          scoreP2 += subScore;
+
+          solutionsHtml += `
+            <li class="p-3 rounded-xl bg-sky-50 border border-sky-200">
+              <div class="font-bold text-sky-950">${qItem.title} (Đạt: ${subScore.toFixed(2)} / 1,00 đ)</div>
+              ${subDetails}
+            </li>
+          `;
         });
-        if (isMatched) scoreP3 += 0.5;
+        solutionsHtml += `</ul>`;
 
-        solutionsHtml += `
-          <li class="p-2.5 rounded-xl ${isMatched ? 'bg-emerald-50 border border-emerald-200' : 'bg-rose-50 border border-rose-200'}">
-            <div class="flex justify-between items-center">
-              <span><strong>Câu ${item.id}:</strong> Đáp số chuẩn: <strong class="text-rose-700">${item.acceptedAnswers[0]}</strong></span>
-              <span class="font-bold ${isMatched ? 'text-emerald-700' : 'text-rose-700'}">Em điền: ${rawAns || 'Chưa điền'} ${isMatched ? '✓ (+0,5đ)' : '✗'}</span>
-            </div>
-            <div class="text-slate-600 mt-1 text-[11px] leading-relaxed">${item.explain}</div>
-          </li>
-        `;
-      });
-      solutionsHtml += `</ul>`;
+        // 3. Chấm Phần III (4 câu x 0,5đ = 2,0đ)
+        let scoreP3 = 0;
+        solutionsHtml += `<div class="font-extrabold text-rose-700 text-xs mb-1.5">PHẦN III: Trắc nghiệm trả lời ngắn (2,0 điểm)</div><ul class="space-y-2 mb-4">`;
+        EXAM_DATA.part3.forEach(item => {
+          const rawAns = (userAnswers.part3[item.id] || "").trim().toLowerCase();
+          const normAns = rawAns.replace(',', '.');
+          const isMatched = item.acceptedAnswers.some(ok => {
+            const normOk = ok.toLowerCase().replace(',', '.');
+            return normOk === normAns || ok.toLowerCase() === rawAns;
+          });
+          if (isMatched) scoreP3 += 0.5;
 
-      // 4. Phần IV: Hướng dẫn chấm Tự luận
-      solutionsHtml += `<div class="font-extrabold text-cyan-800 text-xs mb-1.5">PHẦN IV: Đáp án chuẩn Tự luận (3,0 điểm - Giáo viên chấm qua ảnh)</div><ul class="space-y-2.5">`;
-      EXAM_DATA.part4.forEach(item => {
-        const hasImg = !!userAnswers.part4.images[item.id];
-        const noteText = userAnswers.part4.notes[item.id] || "";
-        solutionsHtml += `
-          <li class="p-3 rounded-xl bg-cyan-50 border border-cyan-200 space-y-1.5">
-            <div class="flex justify-between items-center">
-              <strong class="text-cyan-950">${item.title}</strong>
-              <span class="text-[11px] font-bold ${hasImg ? 'text-emerald-700' : 'text-amber-700'}">${hasImg ? '✓ Đã nộp ảnh chụp' : '⚠️ Chưa đính kèm ảnh'}</span>
-            </div>
-            ${noteText ? `<div class="text-[11px] bg-white p-2 rounded-lg border border-cyan-100"><strong>Ghi chú của em:</strong> ${noteText}</div>` : ''}
-            <pre class="text-[11px] text-slate-700 whitespace-pre-line font-sans leading-relaxed pt-1">${item.solution}</pre>
-          </li>
-        `;
-      });
-      solutionsHtml += `</ul>`;
+          solutionsHtml += `
+            <li class="p-2.5 rounded-xl ${isMatched ? 'bg-emerald-50 border border-emerald-200' : 'bg-rose-50 border border-rose-200'}">
+              <div class="flex justify-between items-center">
+                <span><strong>Câu ${item.id}:</strong> Đáp số chuẩn: <strong class="text-rose-700">${item.acceptedAnswers[0]}</strong></span>
+                <span class="font-bold ${isMatched ? 'text-emerald-700' : 'text-rose-700'}">Em điền: ${rawAns || 'Chưa điền'} ${isMatched ? '✓ (+0,5đ)' : '✗'}</span>
+              </div>
+              <div class="text-slate-600 mt-1 text-[11px] leading-relaxed">${item.explain}</div>
+            </li>
+          `;
+        });
+        solutionsHtml += `</ul>`;
 
-      const totalObjectiveScore = (scoreP1 + scoreP2 + scoreP3).toFixed(2);
-      const imageCount = Object.keys(userAnswers.part4.images).length;
+        // 4. Phần IV: Hướng dẫn chấm Tự luận
+        solutionsHtml += `<div class="font-extrabold text-cyan-800 text-xs mb-1.5">PHẦN IV: Đáp án chuẩn Tự luận (3,0 điểm - Giáo viên chấm qua ảnh)</div><ul class="space-y-2.5">`;
+        EXAM_DATA.part4.forEach(item => {
+          const hasImg = !!userAnswers.part4.images[item.id];
+          const noteText = userAnswers.part4.notes[item.id] || "";
+          solutionsHtml += `
+            <li class="p-3 rounded-xl bg-cyan-50 border border-cyan-200 space-y-1.5">
+              <div class="flex justify-between items-center">
+                <strong class="text-cyan-950">${item.title}</strong>
+                <span class="text-[11px] font-bold ${hasImg ? 'text-emerald-700' : 'text-amber-700'}">${hasImg ? '✓ Đã nộp ảnh chụp' : '⚠️ Chưa đính kèm ảnh'}</span>
+              </div>
+              ${noteText ? `<div class="text-[11px] bg-white p-2 rounded-lg border border-cyan-100"><strong>Ghi chú của em:</strong> ${noteText}</div>` : ''}
+              <pre class="text-[11px] text-slate-700 whitespace-pre-line font-sans leading-relaxed pt-1">${item.solution}</pre>
+            </li>
+          `;
+        });
+        solutionsHtml += `</ul>`;
 
-      // Hiển thị lên Modal
-      document.getElementById("res-name").innerText = document.getElementById("student-name").value.trim();
-      document.getElementById("res-class").innerText = document.getElementById("student-class").value.trim();
-      document.getElementById("res-id").innerText = document.getElementById("student-id").value.trim();
-      document.getElementById("res-timestamp").innerText = `Thời gian nộp: ${new Date().toLocaleString('vi-VN')}`;
+        const totalObjectiveScore = (scoreP1 + scoreP2 + scoreP3).toFixed(2);
+        const imageCount = Object.keys(userAnswers.part4.images).length;
 
-      document.getElementById("res-score-p1").innerText = `${scoreP1.toFixed(2)} / 3.0`;
-      document.getElementById("res-score-p2").innerText = `${scoreP2.toFixed(2)} / 2.0`;
-      document.getElementById("res-score-p3").innerText = `${scoreP3.toFixed(2)} / 2.0`;
-      document.getElementById("res-score-p4").innerText = imageCount > 0 ? `Đã nộp ${imageCount}/2 ảnh` : "Chờ chấm";
+        // Hiển thị thông tin học sinh lên Modal
+        const stName = document.getElementById("student-name")?.value.trim() || "Chưa điền tên";
+        const stClass = document.getElementById("student-class")?.value.trim() || "Chưa điền lớp";
+        const stId = document.getElementById("student-id")?.value.trim() || "---";
 
-      document.getElementById("res-total-score").innerText = `${totalObjectiveScore} / 7.0`;
+        document.getElementById("res-name").innerText = stName;
+        document.getElementById("res-class").innerText = stClass;
+        document.getElementById("res-id").innerText = stId;
+        document.getElementById("res-timestamp").innerText = `Thời gian nộp: ${new Date().toLocaleString('vi-VN')}`;
 
-      const numScore = parseFloat(totalObjectiveScore);
-      let evalText = "";
-      if (numScore >= 6.0) {
-        evalText = "🌟 <strong>Rất xuất sắc!</strong> Em nắm rất chắc kiến thức Vật lí 10 Đề 3 từ sai số phép đo, tổng hợp độ dịch chuyển đến đồ thị độ dịch chuyển – thời gian.";
-      } else if (numScore >= 4.5) {
-        evalText = "👍 <strong>Khá tốt!</strong> Em nắm vững phần lớn kiến thức cơ bản nhưng còn nhầm lẫn một vài câu. Hãy đối chiếu kỹ bảng lời giải chi tiết bên dưới.";
-      } else {
-        evalText = "💪 <strong>Cần cố gắng thêm!</strong> Em hãy ôn lại kỹ công thức sai số ngẫu nhiên trung bình, tổng hợp hai độ dịch chuyển vuông góc và chuyển động thẳng biến đổi đều.";
+        document.getElementById("res-score-p1").innerText = `${scoreP1.toFixed(2)} / 3.0`;
+        document.getElementById("res-score-p2").innerText = `${scoreP2.toFixed(2)} / 2.0`;
+        document.getElementById("res-score-p3").innerText = `${scoreP3.toFixed(2)} / 2.0`;
+        document.getElementById("res-score-p4").innerText = imageCount > 0 ? `Đã nộp ${imageCount}/2 ảnh` : "Chờ chấm";
+
+        document.getElementById("res-total-score").innerText = `${totalObjectiveScore} / 7.0`;
+
+        const numScore = parseFloat(totalObjectiveScore);
+        let evalText = "";
+        if (numScore >= 6.0) {
+          evalText = "🌟 <strong>Rất xuất sắc!</strong> Em nắm rất chắc kiến thức Vật lí 10 Đề 3 từ sai số phép đo, tổng hợp độ dịch chuyển đến đồ thị độ dịch chuyển – thời gian.";
+        } else if (numScore >= 4.5) {
+          evalText = "👍 <strong>Khá tốt!</strong> Em nắm vững phần lớn kiến thức cơ bản nhưng còn nhầm lẫn một vài câu. Hãy đối chiếu kỹ bảng lời giải chi tiết bên dưới.";
+        } else {
+          evalText = "💪 <strong>Cần cố gắng thêm!</strong> Em hãy ôn lại kỹ công thức sai số ngẫu nhiên trung bình, tổng hợp hai độ dịch chuyển vuông góc và chuyển động thẳng biến đổi đều.";
+        }
+        document.getElementById("res-evaluation").innerHTML = evalText;
+        document.getElementById("res-solutions-container").innerHTML = solutionsHtml;
+
+        // Đổi nút Nộp bài thành Xem bảng điểm
+        const headerBtn = document.getElementById("header-submit-btn");
+        const footerBtn = document.getElementById("footer-submit-btn");
+        if (headerBtn) headerBtn.innerText = "Xem bảng điểm 📊";
+        if (footerBtn) footerBtn.innerText = "XEM LẠI BẢNG ĐIỂM & LỜI GIẢI 📊";
+
+        document.getElementById("result-modal").classList.remove("hidden");
+        triggerMathRender();
+      } catch (err) {
+        console.error("Submit error:", err);
+        alert("Hệ thống gặp lỗi khi hiển thị kết quả: " + err.message);
       }
-      document.getElementById("res-evaluation").innerHTML = evalText;
-      document.getElementById("res-solutions-container").innerHTML = solutionsHtml;
-
-      document.getElementById("result-modal").classList.remove("hidden");
-      triggerMathRender();
     }
 
     function closeModalAndReview() {
@@ -1510,6 +1527,12 @@
           userAnswers.part3 = {};
           userAnswers.part4 = { images: {}, notes: {} };
           document.getElementById("result-modal").classList.add("hidden");
+
+          const headerBtn = document.getElementById("header-submit-btn");
+          const footerBtn = document.getElementById("footer-submit-btn");
+          if (headerBtn) headerBtn.innerText = "Nộp bài";
+          if (footerBtn) footerBtn.innerText = "NỘP BÀI KIỂM TRA 🚀";
+
           renderQuiz();
           updateProgressUI();
           startTimer();
@@ -1535,19 +1558,28 @@ Trường THPT Lê Quý Đôn
 Học sinh: ${name} | Lớp: ${cls} | SBD: ${sbd}
 ${time}
 -----------------------------------------
-• Phần I (Trắc nghiệm 12 câu): ${p1}
-• Phần II (Đúng/Sai 2 câu): ${p2}
-• Phần III (Trả lời ngắn 4 câu): ${p3}
-• Phần IV (Tự luận 2 câu): ${p4}
+- Phần I (Trắc nghiệm 12 câu): ${p1}
+- Phần II (Đúng/Sai 2 câu): ${p2}
+- Phần III (Trả lời ngắn 4 câu): ${p3}
+- Phần IV (Tự luận 2 câu): ${p4}
 => TỔNG ĐIỂM TRẮC NGHIỆM: ${total} (+ 3,0đ Tự luận)`;
 
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("Đã sao chép kết quả! Em hãy dán gửi cho giáo viên.", "📋");
+        }).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
       const temp = document.createElement("textarea");
       temp.value = text;
       document.body.appendChild(temp);
       temp.select();
       document.execCommand("copy");
       document.body.removeChild(temp);
-
       showToast("Đã sao chép kết quả! Em hãy dán gửi cho giáo viên.", "📋");
     }
 
